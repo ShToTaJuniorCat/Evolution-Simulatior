@@ -1,0 +1,35 @@
+# Constants
+
+# Creature specific
+CREATURE_RADIUS = 10
+MAX_CREATURE_AGE = 1000
+MIN_CREATURE_ENERGY = 0
+START_ENERGY = 100
+REPRODUCTION_COST = 10
+TURN_COST = 5
+MOVE_COST = 5
+
+# Brain specifications
+NUM_INPUT_NEURONS = 6
+HIDDEN_LAYERS = [10, 20, 10]
+NUM_OUTPUT_NEURONS = 5
+
+# Simulation settings
+NUM_CREATURES = 1
+PLANT_COUNT = 1
+PLANT_ENERGY = 50
+PLANT_IMG_PATH = "resources/tree.png"
+
+# Mutation chances
+MUTATION_RATE = 0.1
+COLOR_MUTATION_CHANCE = 1
+X_MUTATION_CHANCE = 1
+Y_MUTATION_CHANCE = 1
+
+# Window adjustments
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 700
+BACKGROUND_COLOR = (0,0,0)
+WINDOW_NAME = "Evolution Simulation"
+X_IMG_PATH = "resources/x.png"
+I_IMG_PATH = "resources/i.png"
