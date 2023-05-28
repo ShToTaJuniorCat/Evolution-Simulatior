@@ -1,5 +1,9 @@
-from math import sin, cos, degrees, radians, atan2
+from math import sin, cos, degrees, radians, atan2, tan, acos
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH, REPRODUCTION_COST
+
+
+def sign(x):
+    return int(abs(x)/x)
 
 
 def points_distance(point1, point2):
@@ -17,7 +21,12 @@ def closest_plant_distance(creature, plants):
 
 def angle_from_closest_plant(creature, plants):
     plant = closest_plant(creature, plants)
-    return (360 - degrees(atan2(plant.y - creature.y, plant.x - creature.x))) % 360
+
+    difference_x = creature.x - plant.x
+    difference_y = (-creature.y) - (-plant.y)
+    angle = 180 - degrees(atan2(difference_y, difference_x))
+    turn_angle = -(creature.facing - angle)
+    return turn_angle % 360
 
 
 def can_reproduce(creature):
@@ -38,5 +47,3 @@ def can_move_forward(creature):
 
     # check if the new position is within the screen bounds
     return (new_x - creature.radius >= 0) and (new_x + creature.radius <= SCREEN_WIDTH) and (new_y - creature.radius >= 0) and (new_y + creature.radius <= SCREEN_HEIGHT)
-
-

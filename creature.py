@@ -69,6 +69,11 @@ class Creature:
                f"\nStep = {self.step}. Traveled {self.total_distance}. Currently facing {self.facing}°."
 
 
+    def draw(self):
+        self.draw_body()
+        self.draw_eye()
+    
+
     def draw_body(self):
         """
         Draws this creature on the given surface.
@@ -128,18 +133,18 @@ class Creature:
         self.brain.mutate_weights()
         action, value = self.brain.decide_action()
 
-        if self.special:
-            print(f"Special creature: {inputs, action, value}")
+        #if self.special:
+        #    print(f"Special creature: {inputs, action, value}")
 
-##        if action == "reproduce":
-##            offspring = self.reproduce()
-##            return offspring
-##        elif action == "move":
-##            self.move(self.step * value)
-##            return None
-##        elif action == "turn":
-##            self.turn(value * 360)
-##            return None
+        if action == "reproduce":
+            offspring = self.reproduce()
+            return offspring
+        elif action == "move":
+            self.move(self.step * value)
+            return None
+        elif action == "turn":
+            self.turn(value * 360)
+            return None
 
 
     def eat(self, plant):
@@ -188,5 +193,4 @@ class Creature:
         self.energy -= TURN_COST
         self.movement_energy_consumed += TURN_COST
 
-        self.draw_body()
-        self.draw_eye()
+        self.draw()

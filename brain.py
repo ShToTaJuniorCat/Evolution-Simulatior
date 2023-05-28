@@ -112,7 +112,10 @@ class Brain:
         Returns:
             The output value after applying the sigmoid function.
         """
-        return 1 / (1 + np.exp(-x))
+        try:
+            return 1 / (1 + np.exp(-x))
+        except RuntimeWarning:
+            return 0
 
 
     def mutate_weights(self):

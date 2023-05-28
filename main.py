@@ -31,17 +31,15 @@ i_rect.topright = (x_rect[0] - 15, 10)
 screen.blit(i_img, i_rect)
 
 # Create a list of creatures
-creatures = [Creature(100, 100, (255, 255, 255), "Robert", 10, 1, Brain(6, [10, 20, 10], 6), screen)] #random_creature(CREATURE_RADIUS,
-              #               SCREEN_WIDTH - CREATURE_RADIUS,
-              #               CREATURE_RADIUS,
-              #               SCREEN_HEIGHT - CREATURE_RADIUS,
-              #               screen) for _ in range(NUM_CREATURES)]
+creatures = [random_creature(CREATURE_RADIUS,
+                             SCREEN_WIDTH - CREATURE_RADIUS,
+                             CREATURE_RADIUS,
+                             SCREEN_HEIGHT - CREATURE_RADIUS,
+                             screen) for _ in range(NUM_CREATURES)]
 creatures[0].special = True
 
 
 plants = [Plant(randint(10, SCREEN_WIDTH - 10), randint(10, SCREEN_HEIGHT - 10)) for _ in range(PLANT_COUNT)]
-
-print(plants[0].x, -plants[0].y)
 
 flag = False
 # Main game loop
@@ -97,8 +95,7 @@ while running:
         # The creature is now older.
         creature.time_alive += 1
         action = creature.take_action(plants)
-        input((creatures[0].x, -creatures[0].y))
-        creature.move(50)
+
         if action:
             creatures.append(action)
         
@@ -108,6 +105,8 @@ while running:
             creature.remove()
             creatures.remove(creature)
             del creature
+
+            
             continue
 
         # Draw all living creatures.
@@ -116,7 +115,7 @@ while running:
 
 
         for plant in plants:
-            if plant.rect.collidepoint(tuple(creature.pygame_rect)[0:2]):
+            if plant.rect.colliderect(creature.pygame_rect.inflate(CREATURE_PLANT_COLLISION_TOLERANCE, CREATURE_PLANT_COLLISION_TOLERANCE)):
                 plant.remove(screen)
                 creature.eat(plant)
                 plants.remove(plant)
@@ -132,8 +131,6 @@ while running:
 
     # Update the display
     pygame.display.update()
-
-    #input()
 
 
 # Quit Pygame

@@ -9,12 +9,12 @@ class Plant:
         self.y = y
 
     def draw(self, screen):
-        # Load the Info image and the X image
+        # Load the plant image and the plant image
         img = image.load(PLANT_IMG_PATH)
 
-        # Draw the X image
+        # Draw the plant image
         self.rect = img.get_rect()
-        self.rect.topright = (self.x, self.y)
+        self.rect.center = (self.x, self.y)
         screen.blit(img, self.rect)
 
     def remove(self, screen):
